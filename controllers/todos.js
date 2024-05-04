@@ -18,10 +18,6 @@ const listAllTasks = async (req, res) => {
 const listSpecifiedTask = async (req, res) => {
   const { id } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send("Invalid Task ID");
-  }
-
   try {
     const task = await TaskModel.findOne({ _id: id });
     if (task) {
@@ -63,10 +59,6 @@ const updateTask = async (req, res) => {
   const { id } = req.params;
   const body = req.body;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send("Invalid Task Id!");
-  }
-
   if (!body) {
     return res.status(400).send("No body given");
   }
@@ -95,10 +87,6 @@ const updateTask = async (req, res) => {
 
 const deleteTask = async (req, res) => {
   const { id } = req.params;
-
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send("Invalid Task Id!");
-  }
 
   try {
     const deletedTask = await TaskModel.findByIdAndDelete(id);

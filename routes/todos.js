@@ -8,16 +8,18 @@ const {
   deleteTask,
 } = require("../controllers/todos");
 
+const validId = require('../middlewares/validId')
+
 const route = express.Router();
 
 route.get("/", listAllTasks);
 
-route.get("/:id", listSpecifiedTask);
+route.get("/:id",validId, listSpecifiedTask);
 
 route.post("/create", createTask);
 
-route.put("/update/:id", updateTask);
+route.put("/update/:id",validId, updateTask);
 
-route.delete("/delete/:id", deleteTask);
+route.delete("/delete/:id",validId, deleteTask);
 
 module.exports = route;
